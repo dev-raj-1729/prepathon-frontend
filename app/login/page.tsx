@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { auth } from "@/firebase/init";
+import { auth, signInWithGoogle } from "@/firebase/init";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -32,11 +32,6 @@ export default function LoginPage() {
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  const handleGoogleLogin = () => {
-    // Handle Google login logic here
-    console.log("Google login");
   };
 
   const handleFacebookLogin = () => {
@@ -98,7 +93,7 @@ export default function LoginPage() {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-6">
-            <Button variant="outline" onClick={handleGoogleLogin}>
+            <Button variant="outline" onClick={signInWithGoogle}>
               Google
             </Button>
             <Button variant="outline" onClick={handleFacebookLogin}>
