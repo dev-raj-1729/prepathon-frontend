@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { auth, signInWithGoogle } from "@/firebase/init";
+import { auth, signInWithFacebook, signInWithGoogle } from "@/firebase/init";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -33,11 +33,6 @@ export default function SignupPage() {
         console.log(error);
         alert("sign in failed");
       });
-  };
-
-  const handleFacebookLogin = () => {
-    // Handle Facebook login logic here
-    console.log("Facebook login");
   };
 
   const handleLoginSwitch = () => {
@@ -98,7 +93,7 @@ export default function SignupPage() {
             <Button variant="outline" onClick={signInWithGoogle}>
               Google
             </Button>
-            <Button variant="outline" onClick={handleFacebookLogin}>
+            <Button variant="outline" onClick={signInWithFacebook}>
               Facebook
             </Button>
           </div>
