@@ -1,6 +1,11 @@
 "use client";
 
-import { publicRoutes, unverifiedEmailRoutes } from "@/config/route";
+import { appAuth, onAppAuthStateChange } from "@/auth/init";
+import {
+  non2faRoutes,
+  publicRoutes,
+  unverifiedEmailRoutes,
+} from "@/config/route";
 import { auth } from "@/firebase/init";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { usePathname, useRouter } from "next/navigation";
@@ -20,6 +25,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     auth.onAuthStateChanged(() => {
       setDummy((prev) => !prev);
     });
+    onAppAuthStateChange(() => {
+      setDummy((prev) => !prev);
+    });
   }, [setDummy]);
   if (!loading) {
     CheckRoutes(router, pathname);
@@ -35,5 +43,7 @@ export function CheckRoutes(router: AppRouterInstance, pathname: string) {
     !unverifiedEmailRoutes.includes(pathname)
   ) {
     router.push("/verify-email");
+  } else if (!appAuth.currentUser && !non2faRoutes.includes(pathname)) {
+    router.push("/twoFactor/login");
   }
 }

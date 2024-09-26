@@ -1,5 +1,6 @@
 "use client";
 
+import { signInWithTOTP } from "@/auth/init";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
@@ -66,11 +67,8 @@ export default function TOTPVerification() {
       return;
     }
 
-    // Here you would typically make an API call to verify the TOTP
-    // For this example, we'll simulate an API call with a timeout
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate API delay
-      // Simulating a successful verification
+      await signInWithTOTP(totp);
       setSuccess(true);
     } catch (err) {
       setError("Invalid code. Please try again.");

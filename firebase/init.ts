@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+import { appAuthSignOut } from "@/auth/init";
 import axios from "axios";
 import { initializeApp } from "firebase/app";
 import {
@@ -65,6 +66,7 @@ export function signInWithFacebook() {
 
 export function handleSignout() {
   signOut(auth);
+  appAuthSignOut();
 }
 
 axios.interceptors.request.use(async (config) => {
