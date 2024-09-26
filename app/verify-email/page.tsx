@@ -42,7 +42,7 @@ export default function VerifyEmailPage() {
               auth.currentUser?.reload().then(() => {
                 console.log("Done Clicked");
                 if (auth.currentUser?.emailVerified) {
-                  router.push("/");
+                  router.push("/twoFactor/register");
                 }
               });
             }}
