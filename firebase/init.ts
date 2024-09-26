@@ -5,6 +5,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -59,4 +60,8 @@ export function signInWithFacebook() {
       console.log("Facebook Login Failed");
       console.log(error);
     });
+}
+
+export function handleSignout() {
+  signOut(auth);
 }
