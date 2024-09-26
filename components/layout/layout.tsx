@@ -1,6 +1,7 @@
 "use client";
 
 import { auth } from "@/firebase/init";
+import { AuthProvider } from "../provider/auth";
 
 export function ClientRootLayout({
   children,
@@ -13,5 +14,5 @@ export function ClientRootLayout({
     console.log("current user observer");
     console.log(auth.currentUser);
   });
-  return <>{children}</>;
+  return <AuthProvider>{children}</AuthProvider>;
 }

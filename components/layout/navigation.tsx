@@ -13,7 +13,11 @@ import { handleSignout } from "@/firebase/init";
 import { User } from "lucide-react";
 import Link from "next/link";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({
+  children,
+}: {
+  children: Readonly<React.ReactNode>;
+}) {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <nav className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

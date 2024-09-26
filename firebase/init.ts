@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+import axios from "axios";
 import { initializeApp } from "firebase/app";
 import {
   FacebookAuthProvider,
@@ -39,7 +40,7 @@ googleAuthProvider.setCustomParameters({
 
 export function signInWithGoogle() {
   console.log("Google Sign in");
-  signInWithPopup(auth, googleAuthProvider)
+  return signInWithPopup(auth, googleAuthProvider)
     .then((result) => {
       console.log("Signed in with Google");
       console.log(result);
@@ -51,7 +52,7 @@ export function signInWithGoogle() {
 }
 
 export function signInWithFacebook() {
-  signInWithPopup(auth, facebookAuthProvider)
+  return signInWithPopup(auth, facebookAuthProvider)
     .then((result) => {
       console.log("Signed in with facebook");
       console.log(result);
@@ -65,3 +66,10 @@ export function signInWithFacebook() {
 export function handleSignout() {
   signOut(auth);
 }
+
+axios.interceptors.request.use(async (config) => {
+  if (auth.currentUser) {
+    config.headers["firebase_token"] = await auth.currentUser.getIdToken();
+  }
+  return config;
+});

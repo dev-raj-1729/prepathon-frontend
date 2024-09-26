@@ -35,6 +35,16 @@ export default function LoginPage() {
       });
   };
 
+  function handleGoogleLogin() {
+    console.log("google log in");
+    signInWithGoogle().then(() => router.push("/"));
+  }
+
+  function handleFacebookLogin() {
+    console.log("facebook");
+    signInWithFacebook().then(() => router.push("/"));
+  }
+
   const handleSignUpSwitch = () => {
     // Handle sign up logic here
     console.log("Sign up");
@@ -97,10 +107,10 @@ export default function LoginPage() {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-6">
-            <Button variant="outline" onClick={signInWithGoogle}>
+            <Button variant="outline" onClick={handleGoogleLogin}>
               Google
             </Button>
-            <Button variant="outline" onClick={signInWithFacebook}>
+            <Button variant="outline" onClick={handleFacebookLogin}>
               Facebook
             </Button>
           </div>
