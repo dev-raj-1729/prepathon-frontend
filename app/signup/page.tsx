@@ -24,7 +24,7 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
@@ -38,7 +38,8 @@ export default function SignupPage() {
       .then((userCredential) => {
         sendEmailVerification(userCredential.user)
           .then(() => {
-            setIsSubmitted(true);
+            // setIsSubmitted(true);
+            router.push("/verify-email");
             console.log("Verification email sent");
           })
           .catch((error) => {
@@ -55,44 +56,43 @@ export default function SignupPage() {
       });
   };
 
-  const handleLoginSwitch = () => {
-    // Handle sign up logic here
-    console.log("Sign up");
-    router.push("/login");
-  };
-  if (isSubmitted) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <Card className="w-[350px]">
-          <CardHeader>
-            <CardTitle>Verify Your Email</CardTitle>
-            <CardDescription>
-              We&apos;ve sent you a verification link.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Alert>
-              {/* <IconComponent name="mail" className="h-4 w-4" /> */}
-              <AlertTitle>Verification email sent</AlertTitle>
-              <AlertDescription>
-                We&apos;ve sent a verification link to {email}. Please check
-                your inbox and click the link to verify your account.
-              </AlertDescription>
-            </Alert>
-          </CardContent>
-          <CardFooter>
-            <Button
-              variant="link"
-              className="w-full"
-              onClick={handleLoginSwitch}
-            >
-              Return to Login
-            </Button>
-          </CardFooter>
-        </Card>
-      </div>
-    );
-  }
+  // const handleLoginSwitch = () => {
+  //   console.log("Sign up");
+  //   router.push("/login");
+  // };
+  // if (isSubmitted) {
+  //   return (
+  //     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+  //       <Card className="w-[350px]">
+  //         <CardHeader>
+  //           <CardTitle>Verify Your Email</CardTitle>
+  //           <CardDescription>
+  //             We&apos;ve sent you a verification link.
+  //           </CardDescription>
+  //         </CardHeader>
+  //         <CardContent>
+  //           <Alert>
+  //             {/* <IconComponent name="mail" className="h-4 w-4" /> */}
+  //             <AlertTitle>Verification email sent</AlertTitle>
+  //             <AlertDescription>
+  //               We&apos;ve sent a verification link to {email}. Please check
+  //               your inbox and click the link to verify your account.
+  //             </AlertDescription>
+  //           </Alert>
+  //         </CardContent>
+  //         <CardFooter>
+  //           <Button
+  //             variant="link"
+  //             className="w-full"
+  //             onClick={handleLoginSwitch}
+  //           >
+  //             Return to Login
+  //           </Button>
+  //         </CardFooter>
+  //       </Card>
+  //     </div>
+  //   );
+  // }
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-[350px]">

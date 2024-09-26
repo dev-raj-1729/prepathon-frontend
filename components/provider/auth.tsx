@@ -1,6 +1,6 @@
 "use client";
 
-import { publicRoutes } from "@/config/route";
+import { publicRoutes, unverifiedEmailRoutes } from "@/config/route";
 import { auth } from "@/firebase/init";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { usePathname, useRouter } from "next/navigation";
@@ -30,5 +30,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 export function CheckRoutes(router: AppRouterInstance, pathname: string) {
   if (!auth.currentUser && !publicRoutes.includes(pathname)) {
     router.push("/login");
+  } else if (
+    !auth.currentUser?.emailVerified &&
+    !unverifiedEmailRoutes.includes(pathname)
+  ) {
+    router.push("/verify-email");
   }
 }
