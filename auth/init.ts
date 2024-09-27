@@ -25,6 +25,7 @@ export function updateApp(newAppAuth: AppAuth) {
 }
 export async function AppAuthInit() {
   if (localStorage) {
+    // TODO Change from localStorage to IndexedDB
     const authJson = localStorage.getItem("appAuth");
     if (authJson) {
       const persistedAppAuth: AppAuth = JSON.parse(authJson);
