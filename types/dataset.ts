@@ -1,3 +1,4 @@
+import { CompanyMeta } from "./company";
 import { AppUser } from "./user";
 
 export enum DatasetVisibility {
@@ -10,4 +11,8 @@ export interface Dataset {
   owner: AppUser;
   name: string;
   visibility: DatasetVisibility;
+}
+
+export interface DatasetPopulated extends Dataset {
+  companies: Array<CompanyMeta>;
 }

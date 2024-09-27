@@ -23,6 +23,7 @@ import { DATA_DOMAIN } from "@/config/endpoints";
 import { Dataset, DatasetVisibility } from "@/types/dataset";
 import axios from "axios";
 import { Eye, EyeOff, MoreHorizontal } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 // Define the Dataset type
@@ -87,7 +88,7 @@ import { useEffect, useState } from "react";
 
 export default function DatasetList() {
   const [datasets, setDatasets] = useState<Dataset[]>([]);
-
+  const router = useRouter();
   //   const toggleVisibility = (id: string) => {
   //     setDatasets(
   //       datasets.map((dataset) =>
@@ -110,6 +111,10 @@ export default function DatasetList() {
       });
   }, []);
 
+  function handleRowClick(dataset: Dataset) {
+    router.push("datasets/" + dataset._id);
+  }
+
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-2xl font-bold mb-5">Datasets</h1>
@@ -124,7 +129,11 @@ export default function DatasetList() {
         </TableHeader>
         <TableBody>
           {datasets.map((dataset) => (
-            <TableRow key={dataset._id}>
+            <TableRow
+              key={dataset._id}
+              onClick={() => handleRowClick(dataset)}
+              className="cursor-pointer hover:bg-muted/50"
+            >
               <TableCell className="font-medium">{dataset.name}</TableCell>
               <TableCell>
                 <div className="flex items-center">
